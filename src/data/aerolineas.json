@@ -1,0 +1,25 @@
+{
+    "aerolineas": [
+      {
+        "aeroId": "1",
+        "aeroNombre": "Avianca"
+      },
+      {
+        "aeroId": "2",
+        "aeroNombre": "Satena"
+      },
+      {
+        "aeroId": "3",
+        "aeroNombre": "Vivair"
+      },
+      {
+        "aeroId": "4",
+        "aeroNombre": "Latam"
+      },
+      {
+        "aeroId": "5",
+        "aeroNombre": "Tampa"
+      }
+    ]
+  }
+  

@@ -1,87 +1,89 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-
 // data
-import { todos } from './todos.json';
+import { personas } from './data/personas.json';
+// subcomponentes
+import PersonaForm from './components/PersonaForm';
+import Menu from './components/Menu';
 
-// subcomponents
-import TodoForm from './components/TodoForm';
-
-class App extends Component {
-  constructor() {
-    super();
+export default class App extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      todos
+      personas,
+      name: ''
     }
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-  }
+    this.handleAddPersona = this.handleAddPersona.bind(this);
+    this.handlerClick = this.handlerClick.bind(this);
 
-  removeTodo(index) {
-    this.setState({
-      todos: this.state.todos.filter((e, i) => {
-        return i !== index
-      })
-    });
-  }
 
-  handleAddTodo(todo) {
+  }
+  //handler añadir persona
+  handleAddPersona(persona) {
     this.setState({
-      todos: [...this.state.todos, todo]
+      personas: [...this.state.personas, persona]
     })
   }
+  //handler mensaje bienvenida
+  handlerClick(name){
+    this.setState({name})
+    //console.log('“Hola, bienvenido, sabemos que quieres viajar en ', {name})
+
+}
+
 
   render() {
-    const todos = this.state.todos.map((todo, i) => {
+    const personas = this.state.personas.map((persona, i) => {
       return (
-        <div className="col-md-4" key={i}>
-          <div className="card mt-4">
-            <div className="card-title text-center">
-              <h3>{todo.title}</h3>
-              <span className="badge badge-pill badge-danger ml-2">
-                {todo.priority}
-              </span>
-            </div>
-            <div className="card-body">
-              {todo.description}
-            </div>
-            <div className="card-footer">
-              <button
-                className="btn btn-danger"
-                onClick={this.removeTodo.bind(this, i)}>
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
+        // <div className="container">
+        //   <div className="col-md-12" key={i}>
+        //   <div className="card mt-4 p-2">
+        //     <div className="card-title">
+        //       Nombre: {persona.nombrePersona}
+        //     </div>
+        //     <div>
+        //         Edad: {persona.edad}
+        //       </div>
+        //     <div>
+        //       Celular: {persona.celular}
+        //     </div>
+        //     <div>
+        //       E-mail: {persona.email}
+        //     </div>
+        //     <div className="card-footer">
+        //     </div>
+        //   </div>
+        // </div>
+        // </div>
+         console.log(persona)
+         
       )
     });
 
-    // RETURN THE COMPONENT
     return (
       <div className="App">
-
-        <nav className="navbar navbar-dark bg-dark">
+        <nav className="navbar navbar-dark bg-dark text-light">
           <a className="navbar-brand" href="/">
-            Tasks
-            <span className="badge badge-pill badge-light ml-2">
-              {this.state.todos.length}
-            </span>
+          Front-End React Developer test.
           </a>
+          <Menu handlerClick={ this.handlerClick }/>
         </nav>
 
-        <div className="container">
-          <div className="row mt-4">
+        <div className="content text-center">
+          {this.state.name && <div className="card card-body m-3">
+           <h4>Hola, bienvenido. Sabemos que quieres viajar en {this.state.name}. Por favor, diligencia el siguiente formulario:</h4>
+          </div>}
+        </div>
 
+        <div className="container">
+          <div className="row mt-2">
             <div className="col-md-4 text-center">
-                <img src={logo} className="App-logo" alt="logo" />
-              <TodoForm onAddTodo={this.handleAddTodo}></TodoForm>
+              <PersonaForm onAddPersona={this.handleAddPersona}></PersonaForm>
             </div>
 
-            <div className="col-md-8">
-              <div className="row">
-                {todos}
-              </div>
+            <div className="col-md-4">
+               {personas}
             </div>
           </div>
         </div>
@@ -89,5 +91,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
